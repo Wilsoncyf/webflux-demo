@@ -1,0 +1,14 @@
+# application.yaml
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb # 使用 H2 内存数据库，名为 testdb
+    username: sa
+    password:
+
+# 新增以下配置
+logging:
+  level:
+    # 打印出 Spring Data R2DBC 框架层面更详细的日志
+    org.springframework.data.r2dbc: DEBUG
+    # 打印出 H2 R2DBC 驱动层面更详细的日志
+    io.r2dbc.h2: DEBUG
