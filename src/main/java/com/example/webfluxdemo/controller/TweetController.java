@@ -1,15 +1,15 @@
 package com.example.webfluxdemo.controller;
 
+import com.example.webfluxdemo.entity.PostTweetRequest;
+import com.example.webfluxdemo.entity.Tweet;
 import com.example.webfluxdemo.entity.TweetDto;
 import com.example.webfluxdemo.service.TweetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/tweets")
@@ -36,5 +36,13 @@ public class TweetController {
     public Flux<TweetDto> getTimelineForUser(
             @Parameter(description = "用户的唯一ID", required = true, example = "1") @PathVariable Integer userId) {
         return tweetService.getTimelineForUser(userId);
+    }
+
+    @PostMapping
+    public Mono<Tweet> postNewTweet(@RequestBody PostTweetRequest request) {
+        // 为了演示，我们在这里创建一个新的 Tweet 实体
+        // 在真实应用中，创建时间等字段通常由数据库或业务逻辑处理
+        Tweet newTweet = new Tweet(null, request.userId(), request.content(), java.time.LocalDateTime.now());
+        return tweetService.postNewTweet(newTweet);
     }
 }

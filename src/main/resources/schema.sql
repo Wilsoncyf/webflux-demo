@@ -6,7 +6,8 @@ DROP TABLE IF EXISTS reviews;
 CREATE TABLE users (
                        id SERIAL PRIMARY KEY,
                        username VARCHAR(255) NOT NULL,
-                       handle VARCHAR(255) UNIQUE NOT NULL -- 用户的唯一标识，如 @WilsonChen
+                       handle VARCHAR(255) UNIQUE NOT NULL,
+                       bio VARCHAR(255) -- <-- 新增字段
 );
 
 CREATE TABLE tweets (

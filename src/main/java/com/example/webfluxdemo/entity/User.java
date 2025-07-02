@@ -11,4 +11,4 @@ import org.springframework.data.relational.core.mapping.Table;
  * @Author Wilson Chen
  */
 @Table("users")
-public record User(@Id Integer id, String username, String handle) {}
+public record User(@Id Integer id, String username, String handle, String bio) {}
